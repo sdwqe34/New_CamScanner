@@ -70,8 +70,6 @@ class MainWindow(QMainWindow):
         except Exception as e: QMessageBox.critical(self,"خطا",str(e))
     def ocr(self):
         if self.current is None:return
-        lang,ok=QFileDialog.getOpenFileName(self,"Tesseract traineddata را نصب کنید (اختیاری)","","Traineddata (*.traineddata)")
-        # Keep the user's current Tesseract language configuration; do not require selecting the model file.
         from PySide6.QtWidgets import QInputDialog
         language,accepted=QInputDialog.getItem(self,"زبان OCR","زبان نصب‌شده در Tesseract:",["fas","eng","fas+eng"],0,False)
         if not accepted:return
