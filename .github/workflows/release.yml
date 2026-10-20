@@ -59,7 +59,7 @@ jobs:
 
   release:
     name: Publish GitHub Release
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
     needs: [android, windows]
     runs-on: ubuntu-latest
     steps:
@@ -73,4 +73,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" release-assets/* --repo "${GITHUB_REPOSITORY}" --title "Shahab Scanner ${GITHUB_REF_NAME}" --notes-file README.md
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+            TAG="v0.1.0-ci.${GITHUB_RUN_NUMBER}"
+            gh release create "${TAG}" release-assets/* --repo "${GITHUB_REPOSITORY}" --title "Shahab Scanner ${TAG}" --notes-file README.md --prerelease
+          else
+            TAG="${GITHUB_REF_NAME}"
+            gh release create "${TAG}" release-assets/* --repo "${GITHUB_REPOSITORY}" --title "Shahab Scanner ${TAG}" --notes-file README.md
+          fi
