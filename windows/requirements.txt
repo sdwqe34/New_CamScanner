@@ -1,0 +1,6 @@
+PySide6>=6.7
+opencv-python>=4.9
+Pillow>=10.0
+pytesseract>=0.3.10
+numpy>=1.26
+pypdf>=4.0
