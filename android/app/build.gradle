@@ -5,6 +5,11 @@ plugins {
 android {
     namespace 'org.example.docuscanfree'
     compileSdk 35
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions { jvmTarget = '17' }
     defaultConfig {
         applicationId 'org.example.docuscanfree'
         minSdk 23
